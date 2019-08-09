@@ -48,15 +48,15 @@ export class CalendarHeaderComponent implements OnInit {
   ngOnInit() {
   }
   next(): void {
-    let nextDate = new Date();
+    const clone: moment.Moment = this.baseline.clone();
     if (this.isDay()) {
-      this.baseline = this.baseline.clone().add(1, 'day');
+      this.baseline = clone.add(1, 'day');
       this.title = this.getDay(this.baseline);
     } else if (this.isWeek()) {
-      this.baseline = this.baseline.clone().startOf("week").add(1, "week");
+      this.baseline = clone.startOf("week").add(1, "week");
       this.title = this.getWeek(this.baseline);
     } else if (this.isMonth()) {
-      this.baseline  = this.baseline.clone().startOf("month").add(1, "month");
+      this.baseline  = clone.startOf("month").add(1, "month");
       this.title = this.getMonth(this.baseline);
     }
     this.dateChanged.emit(this.baseline);
@@ -72,6 +72,17 @@ export class CalendarHeaderComponent implements OnInit {
     } else if (this.isMonth()) {
       this.baseline = clone.subtract(1, "month");
       this.title = this.getMonth(this.baseline);
+    }
+    this.dateChanged.emit(this.baseline);
+  }
+  today(): void {
+    this.baseline = moment();
+    if (this.isDay()) {
+      this.title = this.getDay(this.baseline);
+    } else if (this.isMonth()) {
+      this.title = this.getMonth(this.baseline);
+    } else if (this.isWeek()) {
+      this.title = this.getWeek(this.baseline);
     }
     this.dateChanged.emit(this.baseline);
   }
