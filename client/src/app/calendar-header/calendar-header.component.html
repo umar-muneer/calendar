@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="left-container">
+    <h2 class="title">{{ title }}</h2>
+    <div class="left-right-arrow-container">
+      <button mat-icon-button (click)="previous()">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </button>
+      <button mat-icon-button (click)="next()">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </button>
+    </div>
+    <div class="today">
+      <button mat-raised-button class="today-button" color="primary">
+        Today
+      </button>
+    </div>
+  </div>
+  <div class="right-container">
+    <mat-form-field>
+      <mat-label>View</mat-label>
+      <mat-select [(value)] = "selectedView" (change)="changeView()">
+        <mat-option *ngFor="let viewOption of viewOptions" [value]="viewOption">
+          {{ viewOption }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>

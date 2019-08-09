@@ -1,0 +1,12 @@
+<div>
+  <app-calendar-header
+    (viewChanged)="onViewChanged($event)"
+    (dateChanged)="onDateChanged($event)"
+  ></app-calendar-header>
+  <div [ngSwitch]="selectedView">
+    <mwl-calendar-month-view *ngSwitchCase="views.VIEW_MONTH" [viewDate]="viewDate"> </mwl-calendar-month-view>
+    <mwl-calendar-week-view *ngSwitchCase="views.VIEW_WEEK" [viewDate]="viewDate"></mwl-calendar-week-view>
+    <mwl-calendar-day-view *ngSwitchCase="views.VIEW_DAY" [viewDate]="viewDate"></mwl-calendar-day-view>
+  </div>
+
+</div>
