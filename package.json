@@ -19,7 +19,6 @@
   "dependencies": {
     "express": "^4.17.1"
   },
-  "heroku-postbuild": "ng build --prod",
   "engines": {
     "node": "8.9.1",
     "npm": "6.4.1"
