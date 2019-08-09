@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
@@ -32,7 +32,8 @@
     "moment": "^2.24.0",
     "rxjs": "^5.5.6",
     "typescript": "~2.5.3",
-    "zone.js": "^0.8.19"
+    "zone.js": "^0.8.19",
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "@angular/cli": "~1.7.3",
@@ -52,5 +53,9 @@
     "protractor": "~5.1.2",
     "ts-node": "~4.1.0",
     "tslint": "~5.9.1"
+  },
+  "engines": {
+    "node": "8.9.1",
+    "npm": "6.4.1"
   }
 }
