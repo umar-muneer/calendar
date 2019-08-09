@@ -8,7 +8,7 @@ import * as views from '../../constants';
 })
 export class CalendarDemoComponent implements OnInit {
   viewDate: Date = new Date();
-  views: Object = views;
+  views: any = views;
   selectedView: string = views.VIEW_DAY;
   constructor() {
   }
