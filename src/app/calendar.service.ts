@@ -8,6 +8,10 @@ export class CalendarService {
   constructor(private httpClient: HttpClient) {}
 
   getEvents(time: moment.Moment) {
-    return this.httpClient.get("/calendar/events");
+    return this.httpClient.get("/api/calendar/events");
+  }
+
+  getHealth() {
+    return this.httpClient.get("/api/health");
   }
 }

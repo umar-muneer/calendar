@@ -1,9 +1,15 @@
 const express = require("express");
 const path = require("path");
 const dotenv = require("dotenv");
+const expressBunyan = require("express-bunyan-logger");
+
 dotenv.config({ path: path.join(__dirname, ".env") });
 const { Calendar } = require("./calendar");
+
 const app = express();
+
+app.use(expressBunyan());
+app.use(expressBunyan.errorLogger());
 app.use(express.static(__dirname + "/dist"));
 
 app.get("/api/health", (req, res) => {

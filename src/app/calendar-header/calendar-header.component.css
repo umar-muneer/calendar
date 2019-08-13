@@ -1,36 +1,37 @@
 .container {
-    display: flex;
-    flex-direction: row;
-    justify-content: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
 }
 .left-container {
-    display: flex;
-    flex: 1;
-    justify-content: left
+  display: flex;
+  flex: 1;
+  justify-content: left;
 }
 .right-container {
-    display: flex;
-    margin-right: 20px;
-    flex-direction: row-reverse;
+  display: flex;
+  margin-right: 20px;
+  flex-direction: row;
 }
 .title {
-  margin-top:auto;
+  margin-top: auto;
   margin-bottom: auto;
 }
 .today {
-    margin-left: 10px;
-    margin-top: auto;
-    margin-bottom: auto;
+  margin-left: 10px;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 .left-right-arrow-container {
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: 10px;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 10px;
 }
 .today-button {
-    font-size: 20px;
+  font-size: 20px;
 }
-/* .view-select {
-    margin-left: 5px;
-    margin-top: 10px;
-} */
+
+.health-status {
+  margin: auto;
+  margin-left: 20px;
+}

@@ -10,7 +10,12 @@
       </button>
     </div>
     <div class="today">
-      <button mat-raised-button class="today-button" color="primary" (click)="today()">
+      <button
+        mat-raised-button
+        class="today-button"
+        color="primary"
+        (click)="today()"
+      >
         Today
       </button>
     </div>
@@ -18,11 +23,15 @@
   <div class="right-container">
     <mat-form-field>
       <mat-label>View</mat-label>
-      <mat-select [(value)] = "selectedView" (change)="changeView()">
+      <mat-select [(value)]="selectedView" (change)="changeView()">
         <mat-option *ngFor="let viewOption of viewOptions" [value]="viewOption">
           {{ viewOption }}
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <div class="health-status">
+      <mat-icon *ngIf="status">flash_on</mat-icon>
+      <mat-icon *ngIf="!status">flash_off</mat-icon>
+    </div>
   </div>
 </div>
