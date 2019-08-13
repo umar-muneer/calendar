@@ -12,15 +12,11 @@ export class CalendarHeaderComponent implements OnInit {
   @Input() timezone: string;
   @Output() viewChanged = new EventEmitter<string>();
   @Output() dateChanged = new EventEmitter<moment.Moment>();
-  private title: string;
-  private viewOptions: string[] = [
-    views.VIEW_DAY,
-    views.VIEW_WEEK,
-    views.VIEW_MONTH
-  ];
-  private selectedView = views.VIEW_DAY;
-  private baseline: moment.Moment;
-  private status: boolean;
+  title: string;
+  viewOptions: string[] = [views.VIEW_DAY, views.VIEW_WEEK, views.VIEW_MONTH];
+  selectedView = views.VIEW_DAY;
+  baseline: moment.Moment;
+  status: boolean;
   constructor(private calendarService: CalendarService) {
     this.baseline = moment();
     this.title = this.getDay(moment());
