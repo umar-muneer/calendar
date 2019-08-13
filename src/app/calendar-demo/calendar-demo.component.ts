@@ -1,10 +1,9 @@
 import * as moment from "moment";
 import { Component, OnInit } from "@angular/core";
 import { CalendarEvent } from "angular-calendar";
-import * as R from "ramda";
 import * as views from "../../constants";
 import { CalendarService } from "../calendar.service";
-import any from "ramda/es/any";
+
 @Component({
   selector: "app-calendar-demo",
   templateUrl: "./calendar-demo.component.html",
