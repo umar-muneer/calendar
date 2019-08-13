@@ -24,6 +24,9 @@ app.get("/api/calendar/events", async (req, res) => {
     res.status(500).json(error);
   }
 });
+app.get("/api/bootstrap", (req, res) => {
+  res.json("OK");
+});
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./", "dist", "index.html"));
 });

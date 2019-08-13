@@ -5,9 +5,9 @@ const key = require(path.join(__dirname, process.env.CREDENTIALS_FILE));
 class Calendar {
   constructor() {
     this.jwtClient = new google.auth.JWT(
-      key.client_email,
+      process.env.SA_CLIENT_EMAIL,
       null,
-      key.private_key,
+      process.env.SA_PRIVATE_KEY.replace(/\\n/g, "\n"),
       ["https://www.googleapis.com/auth/calendar"],
       null
     );
