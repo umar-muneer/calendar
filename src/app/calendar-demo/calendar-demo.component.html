@@ -1,6 +1,5 @@
 <div>
   <app-calendar-header
-    (viewChanged)="onViewChanged($event)"
     (dateChanged)="onDateChanged($event)"
   ></app-calendar-header>
   <div [ngSwitch]="selectedView">

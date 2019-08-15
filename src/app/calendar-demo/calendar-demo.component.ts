@@ -28,12 +28,12 @@ export class CalendarDemoComponent implements OnInit, OnDestroy {
         err => console.log(err),
         () => console.log("done")
       );
+    this.calendarService.viewChanged.subscribe((selectedView: string) => {
+      this.selectedView = selectedView;
+    });
   }
   ngOnDestroy() {
     this.eventsSubscription.unsubscribe();
-  }
-  onViewChanged(view: string): void {
-    this.selectedView = view;
   }
   onDateChanged(date: moment.Moment): void {
     this.viewDate = date.toDate();

@@ -4,6 +4,7 @@ import { EventEmitter } from "@angular/core";
 import { CalendarService } from "../calendar.service";
 import * as views from "../../constants";
 import { Subscription } from "rxjs/Subscription";
+import { HealthService } from "../health.service";
 @Component({
   selector: "app-calendar-header",
   templateUrl: "./calendar-header.component.html",
@@ -11,7 +12,6 @@ import { Subscription } from "rxjs/Subscription";
 })
 export class CalendarHeaderComponent implements OnInit, OnDestroy {
   @Input() timezone: string;
-  @Output() viewChanged = new EventEmitter<string>();
   @Output() dateChanged = new EventEmitter<moment.Moment>();
   title: string;
   viewOptions: string[] = [views.VIEW_DAY, views.VIEW_WEEK, views.VIEW_MONTH];
@@ -19,12 +19,15 @@ export class CalendarHeaderComponent implements OnInit, OnDestroy {
   baseline: moment.Moment;
   status: boolean;
   private healthSubscription: Subscription;
-  constructor(private calendarService: CalendarService) {
+  constructor(
+    private healthService: HealthService,
+    private calendarService: CalendarService
+  ) {
     this.baseline = moment();
     this.title = this.getDay(moment());
   }
   ngOnInit() {
-    this.healthSubscription = this.calendarService.healthObservable.subscribe(
+    this.healthSubscription = this.healthService.healthCheck.subscribe(
       (status: boolean) => {
         this.status = status;
       }
@@ -108,6 +111,6 @@ export class CalendarHeaderComponent implements OnInit, OnDestroy {
     } else if (this.isMonth()) {
       this.title = this.getMonth(this.baseline);
     }
-    this.viewChanged.emit(this.selectedView);
+    this.calendarService.viewChanged.emit(this.selectedView);
   }
 }
