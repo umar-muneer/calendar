@@ -1,14 +1,15 @@
 import * as moment from "moment";
-import { Component, OnInit, Input, Output } from "@angular/core";
+import { Component, OnInit, Input, Output, OnDestroy } from "@angular/core";
 import { EventEmitter } from "@angular/core";
 import { CalendarService } from "../calendar.service";
 import * as views from "../../constants";
+import { Subscription } from "rxjs/Subscription";
 @Component({
   selector: "app-calendar-header",
   templateUrl: "./calendar-header.component.html",
   styleUrls: ["./calendar-header.component.css"]
 })
-export class CalendarHeaderComponent implements OnInit {
+export class CalendarHeaderComponent implements OnInit, OnDestroy {
   @Input() timezone: string;
   @Output() viewChanged = new EventEmitter<string>();
   @Output() dateChanged = new EventEmitter<moment.Moment>();
@@ -17,14 +18,20 @@ export class CalendarHeaderComponent implements OnInit {
   selectedView = views.VIEW_DAY;
   baseline: moment.Moment;
   status: boolean;
+  private healthSubscription: Subscription;
   constructor(private calendarService: CalendarService) {
     this.baseline = moment();
     this.title = this.getDay(moment());
   }
   ngOnInit() {
-    this.calendarService.getHealth().subscribe(() => {
-      this.status = true;
-    }, console.error);
+    this.healthSubscription = this.calendarService.healthObservable.subscribe(
+      (status: boolean) => {
+        this.status = status;
+      }
+    );
+  }
+  ngOnDestroy() {
+    this.healthSubscription.unsubscribe();
   }
   getDay(baseline: moment.Moment): string {
     return baseline.clone().format("DD-MMM-YYYY");
