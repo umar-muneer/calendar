@@ -4,8 +4,8 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start-server": "node backend/server.js | bunyan",
-    "start": "ng serve --proxy-config=proxy.conf.json",
+    "start": "node backend/server.js | bunyan",
+    "serve": "ng serve --proxy-config=proxy.conf.json",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
