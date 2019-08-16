@@ -32,6 +32,16 @@ export class CalendarHeaderComponent implements OnInit, OnDestroy {
         this.status = status;
       }
     );
+    this.calendarService.viewChanged.subscribe((view: string) => {
+      this.selectedView = view;
+      if (this.isDay()) {
+        this.title = this.getDay(this.baseline);
+      } else if (this.isWeek()) {
+        this.title = this.getWeek(this.baseline);
+      } else if (this.isMonth()) {
+        this.title = this.getMonth(this.baseline);
+      }
+    });
   }
   ngOnDestroy() {
     this.healthSubscription.unsubscribe();
@@ -104,13 +114,6 @@ export class CalendarHeaderComponent implements OnInit, OnDestroy {
   }
   changeView(): void {
     console.log("emitting", this.selectedView);
-    if (this.isDay()) {
-      this.title = this.getDay(this.baseline);
-    } else if (this.isWeek()) {
-      this.title = this.getWeek(this.baseline);
-    } else if (this.isMonth()) {
-      this.title = this.getMonth(this.baseline);
-    }
     this.calendarService.viewChanged.emit(this.selectedView);
   }
 }

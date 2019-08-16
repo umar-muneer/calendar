@@ -7,6 +7,7 @@
       *ngSwitchCase="views.VIEW_MONTH"
       [events]="events"
       [viewDate]="viewDate"
+      (dayClicked)="onDayClickedInMonthView($event)"
     >
     </mwl-calendar-month-view>
     <mwl-calendar-week-view

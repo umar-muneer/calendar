@@ -39,7 +39,7 @@ export class CalendarDemoComponent implements OnInit, OnDestroy {
     this.viewDate = date.toDate();
   }
   onDayClickedInMonthView($event) {
-    console.log($event);
+    this.calendarService.viewChanged.emit(views.VIEW_DAY);
   }
   onRightClick($event) {
     console.log("right click:", $event);
