@@ -10,7 +10,7 @@ const app = express();
 
 app.use(expressBunyan());
 app.use(expressBunyan.errorLogger());
-app.use(express.static(__dirname + "/dist"));
+app.use(express.static(path.join(__dirname, "../dist")));
 
 app.get("/api/health", (req, res) => {
   res.json("OK");
@@ -27,8 +27,8 @@ app.get("/api/calendar/events", async (req, res) => {
 app.get("/api/bootstrap", (req, res) => {
   res.json("OK");
 });
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./", "dist", "index.html"));
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../", "dist", "index.html"));
 });
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`server listening at port: ${port}`));
