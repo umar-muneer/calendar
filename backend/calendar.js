@@ -1,7 +1,6 @@
 const { google } = require("googleapis");
 const path = require("path");
 const util = require("util");
-const key = require(path.join(__dirname, process.env.CREDENTIALS_FILE));
 class Calendar {
   constructor() {
     this.jwtClient = new google.auth.JWT(
