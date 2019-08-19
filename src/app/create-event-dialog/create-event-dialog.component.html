@@ -1,0 +1,28 @@
+<div class="container">
+  <h1 mat-dialog-title class="title">Add an Event</h1>
+  <div mat-dialog-content class="content">
+    <mat-form-field>
+      <input matInput placeholder="Title" [value]="title"/>
+    </mat-form-field>
+    <div class="date-time-picker">
+      <mat-form-field class="date-picker">
+        <input matInput [matDatepicker]="startDatePicker" placeholder="Start Date" [value]="startDate">
+        <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #startDatePicker></mat-datepicker>
+      </mat-form-field>
+      <timepicker [(ngModel)]="startTime" class="time-picker"></timepicker>
+    </div>
+    <div class="end-date-time-picker">
+      <mat-form-field class="date-picker">
+        <input matInput [matDatepicker]="endDatePicker" placeholder="End Date" [value]="endDate">
+        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #endDatePicker></mat-datepicker>
+      </mat-form-field>
+      <timepicker [(ngModel)]="endTime" class="time-picker"></timepicker>
+    </div>
+  </div>
+  <div class="action-buttons">
+    <button mat-raised-button color="warn" (click)="onNoClick()">Cancel</button>
+    <button mat-raised-button color="primary" class="ok-action-button" [mat-dialog-close]="time">Ok</button>
+  </div>  
+</div>

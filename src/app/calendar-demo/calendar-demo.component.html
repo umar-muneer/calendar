@@ -14,11 +14,13 @@
       *ngSwitchCase="views.VIEW_WEEK"
       [events]="events"
       [viewDate]="viewDate"
+      (hourSegmentClicked)="onTimeClickedInDayView($event)"
     ></iq-calendar-week-hours-view>
     <mwl-calendar-day-view
       *ngSwitchCase="views.VIEW_DAY"
       [events]="events"
       [viewDate]="viewDate"
+      (hourSegmentClicked)="onTimeClickedInDayView($event)"
     ></mwl-calendar-day-view>
   </div>
 </div>

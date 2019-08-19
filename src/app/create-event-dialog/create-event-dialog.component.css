@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+.title {
+    margin: auto;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+}
+.date-time-picker {
+    display: flex;
+}
+.end-date-time-picker {
+    display: flex;
+    margin-top: 20px;
+}
+.date-picker {
+    margin-top: 13px;
+}
+.time-picker {
+    margin-left: 15px;
+}
+.action-buttons {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 10px;
+}
+.ok-action-button {
+    margin-right: 10px;
+}

@@ -1,14 +1,15 @@
-.container {
+.flex-container {
   display: flex;
   flex-direction: row;
   justify-content: left;
 }
-.left-container {
+.flex-left-container {
   display: flex;
   flex: 1;
   justify-content: left;
+  margin-left: 10px;
 }
-.right-container {
+.flex-right-container {
   display: flex;
   margin-right: 20px;
   flex-direction: row;

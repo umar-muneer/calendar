@@ -1,5 +1,5 @@
-<div class="container">
-  <div class="left-container">
+<div class="flex-container">
+  <div class="flex-left-container">
     <h2 class="title">{{ title }}</h2>
     <div class="left-right-arrow-container">
       <button mat-icon-button (click)="previous()">
@@ -20,7 +20,7 @@
       </button>
     </div>
   </div>
-  <div class="right-container">
+  <div class="flex-right-container">
     <mat-form-field>
       <mat-label>View</mat-label>
       <mat-select [(value)]="selectedView" (change)="changeView()">
