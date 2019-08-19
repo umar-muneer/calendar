@@ -1,8 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import moment = require('moment');
-import { getDayView } from 'calendar-utils';
-import { getLocaleDateFormat } from '@angular/common';
+import * as moment from "moment";
 @Component({
   selector: 'app-create-event-dialog',
   templateUrl: './create-event-dialog.component.html',
