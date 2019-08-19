@@ -7,11 +7,11 @@ import * as moment from "moment";
   styleUrls: ['./create-event-dialog.component.css']
 })
 export class CreateEventDialogComponent implements OnInit {
-  private startDate: Date;
-  private startTime: Date;
-  private endDate: Date;
-  private endTime: Date;
-  private title: string;
+  startDate: Date;
+  startTime: Date;
+  endDate: Date;
+  endTime: Date;
+  title: string;
   constructor(
     public dialogRef: MatDialogRef<CreateEventDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
