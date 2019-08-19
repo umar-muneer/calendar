@@ -5,10 +5,11 @@ import { Observable } from "rxjs/Observable";
 import { map, merge, tap } from "rxjs/operators";
 import { CalendarEvent } from "angular-calendar";
 import { ICalendarModel } from "./calendar.model";
+import { IViewChanged } from "./utils";
 
 @Injectable()
 export class CalendarService {
-  viewChanged = new EventEmitter<string>();
+  viewChanged = new EventEmitter<IViewChanged>();
 
   constructor(private httpClient: HttpClient) {}
 

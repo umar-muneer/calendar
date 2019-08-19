@@ -5,6 +5,7 @@ import { CalendarService } from "../calendar.service";
 import * as views from "../../constants";
 import { Subscription } from "rxjs/Subscription";
 import { HealthService } from "../health.service";
+import { IViewChanged } from "../utils";
 @Component({
   selector: "app-calendar-header",
   templateUrl: "./calendar-header.component.html",
@@ -32,8 +33,9 @@ export class CalendarHeaderComponent implements OnInit, OnDestroy {
         this.status = status;
       }
     );
-    this.calendarService.viewChanged.subscribe((view: string) => {
-      this.selectedView = view;
+    this.calendarService.viewChanged.subscribe((args: IViewChanged) => {
+      this.selectedView = args.viewType;
+      this.baseline = moment(args.day);
       if (this.isDay()) {
         this.title = this.getDay(this.baseline);
       } else if (this.isWeek()) {
@@ -114,6 +116,6 @@ export class CalendarHeaderComponent implements OnInit, OnDestroy {
   }
   changeView(): void {
     console.log("emitting", this.selectedView);
-    this.calendarService.viewChanged.emit(this.selectedView);
+    this.calendarService.viewChanged.emit({ viewType: this.selectedView });
   }
 }

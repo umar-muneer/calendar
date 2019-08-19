@@ -28,8 +28,9 @@ export class CalendarDemoComponent implements OnInit, OnDestroy {
         err => console.log(err),
         () => console.log("done")
       );
-    this.calendarService.viewChanged.subscribe((selectedView: string) => {
-      this.selectedView = selectedView;
+    this.calendarService.viewChanged.subscribe(({ viewType, day }) => {
+      this.selectedView = viewType;
+      this.viewDate = day || this.viewDate;
     });
   }
   ngOnDestroy() {
@@ -38,8 +39,8 @@ export class CalendarDemoComponent implements OnInit, OnDestroy {
   onDateChanged(date: moment.Moment): void {
     this.viewDate = date.toDate();
   }
-  onDayClickedInMonthView($event) {
-    this.calendarService.viewChanged.emit(views.VIEW_DAY);
+  onDayClickedInMonthView({ day: { date }}) {
+    this.calendarService.viewChanged.emit({ viewType: views.VIEW_DAY, day: date});
   }
   onRightClick($event) {
     console.log("right click:", $event);
