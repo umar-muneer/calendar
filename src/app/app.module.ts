@@ -2,6 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
 import { CalendarModule } from "angular-calendar";
+import { CalendarWeekHoursViewModule } from "angular-calendar-week-hours-view";
 import { MatButtonModule } from "@angular/material/button";
 import { MatSelectModule } from "@angular/material/select";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -28,7 +29,8 @@ import { HealthService } from "./health.service";
     MatSelectModule,
     MatFormFieldModule,
     MatIconModule,
-    CalendarModule.forRoot()
+    CalendarModule.forRoot(),
+    CalendarWeekHoursViewModule
   ],
   providers: [CalendarService, HealthService],
   bootstrap: [AppComponent]

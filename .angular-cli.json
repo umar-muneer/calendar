@@ -15,7 +15,7 @@
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
-      "styles": ["styles.css"],
+      "styles": ["../node_modules/angular-calendar-week-hours-view/angular-calendar-week-hours-view.scss", "styles.css"],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {

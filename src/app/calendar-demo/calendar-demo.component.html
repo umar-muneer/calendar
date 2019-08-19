@@ -10,11 +10,11 @@
       (dayClicked)="onDayClickedInMonthView($event)"
     >
     </mwl-calendar-month-view>
-    <mwl-calendar-week-view
+    <iq-calendar-week-hours-view
       *ngSwitchCase="views.VIEW_WEEK"
       [events]="events"
       [viewDate]="viewDate"
-    ></mwl-calendar-week-view>
+    ></iq-calendar-week-hours-view>
     <mwl-calendar-day-view
       *ngSwitchCase="views.VIEW_DAY"
       [events]="events"

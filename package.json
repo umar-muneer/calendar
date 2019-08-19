@@ -26,6 +26,7 @@
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
     "angular-calendar": "^0.24.1",
+    "angular-calendar-week-hours-view": "^1.0.2",
     "bunyan": "^1.8.12",
     "core-js": "^2.4.1",
     "date-fns": "^1.30.1",
