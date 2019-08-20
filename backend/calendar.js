@@ -72,8 +72,7 @@ class Calendar {
           }
         }
       });
-      console.log(result, "###");
-      return result;
+      return result.data;
     } catch (error) {
       console.error("threw error: ", error);
       throw error;

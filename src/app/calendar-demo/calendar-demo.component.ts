@@ -19,10 +19,15 @@ export class CalendarDemoComponent implements OnInit, OnDestroy {
   viewDate: Date = new Date();
   views: any = views;
   selectedView: string = views.VIEW_DAY;
+  opInProgress: boolean = false;
   private eventsSubscription: Subscription;
 
-  constructor(private calendarService: CalendarService, private dialog: MatDialog) {}
+  constructor(
+    private calendarService: CalendarService,
+    private dialog: MatDialog
+  ) {}
   async ngOnInit() {
+    this.showHideProgressSpinner(true);
     this.eventsSubscription = this.calendarService
       .getEvents(moment())
       .subscribe(
@@ -30,7 +35,7 @@ export class CalendarDemoComponent implements OnInit, OnDestroy {
           this.events = [...data];
         },
         err => console.log(err),
-        () => console.log("done")
+        () => this.showHideProgressSpinner(false)
       );
     this.calendarService.viewChanged.subscribe(({ viewType, day }) => {
       this.selectedView = viewType;
@@ -40,35 +45,51 @@ export class CalendarDemoComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.eventsSubscription.unsubscribe();
   }
+  showHideProgressSpinner(val: boolean): void {
+    this.opInProgress = val;
+  }
   onDateChanged(date: moment.Moment): void {
     this.viewDate = date.toDate();
   }
-  onDayClickedInMonthView({ day: { date }}) {
-    this.calendarService.viewChanged.emit({ viewType: views.VIEW_DAY, day: date});
+  onDayClickedInMonthView({ day: { date } }) {
+    this.calendarService.viewChanged.emit({
+      viewType: views.VIEW_DAY,
+      day: date
+    });
   }
-  onTimeClickedInDayView($event: { date: Date}) {
+  onTimeClickedInDayView($event: { date: Date }) {
     this.openDialog($event.date);
   }
   createEvent(data: IEvent) {
-    this.calendarService.createEvent(data).subscribe(() => {
-      this.events = [...this.events, {
-        title: data.title,
-        start: data.startDate,
-        end: data.endDate
-      }];
-    });
+    this.showHideProgressSpinner(true);
+    this.calendarService.createEvent(data).subscribe(
+      () => {
+        this.events = [
+          ...this.events,
+          {
+            title: data.title,
+            start: data.startDate,
+            end: data.endDate
+          }
+        ];
+      },
+      () => {},
+      () => this.showHideProgressSpinner(false)
+    );
   }
   openDialog(date: Date): void {
     let dialogRef = this.dialog.open(CreateEventDialogComponent, {
-      width: '480px',
+      width: "480px",
       data: {
         title: "New Event",
         startDate: date,
-        endDate: moment(date).add(1, "hours").toDate()
+        endDate: moment(date)
+          .add(1, "hours")
+          .toDate()
       }
     });
     dialogRef.afterClosed().subscribe((result: IEvent) => {
-      this.createEvent(result); 
+      this.createEvent(result);
     });
   }
 }

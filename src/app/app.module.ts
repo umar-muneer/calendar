@@ -12,6 +12,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatProgressSpinner, MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { HttpClientModule } from "@angular/common/http";
 import { TimepickerModule } from "ngx-bootstrap/timepicker";
 import { AppComponent } from "./app.component";
@@ -40,6 +41,7 @@ import { CreateEventDialogComponent } from './create-event-dialog/create-event-d
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatProgressSpinnerModule,
     MatInputModule,
     CalendarModule.forRoot(),
     CalendarWeekHoursViewModule,

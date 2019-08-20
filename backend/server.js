@@ -32,8 +32,8 @@ app.post("/api/calendar", (req, res) => {
 app.post("/api/calendar/events", async(req, res) => {
   const { startDate, endDate, title } = req.body;
   const calendar = new Calendar();
-  await calendar.createEvent({ startDate, endDate, title });
-  res.json("OK");
+  const result = await calendar.createEvent({ startDate, endDate, title });
+  res.json(result);
 });
 app.get("/api/bootstrap", (req, res) => {
   res.json("OK");
