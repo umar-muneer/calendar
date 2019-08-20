@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-const HEALTH_CHECK_INTERVAL = 5000;
+const HEALTH_CHECK_INTERVAL = 60000;
 const HEALTHY_RESPONSE = "OK";
 @Injectable()
 export class HealthService {

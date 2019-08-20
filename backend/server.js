@@ -8,7 +8,8 @@ const { Calendar } = require("./calendar");
 
 const app = express();
 
-app.use(expressBunyan());
+app.use(express.json());
+// app.use(expressBunyan());
 app.use(expressBunyan.errorLogger());
 app.use(express.static(path.join(__dirname, "../dist")));
 
@@ -23,6 +24,16 @@ app.get("/api/calendar/events", async (req, res) => {
   } catch (error) {
     res.status(500).json(error);
   }
+});
+app.post("/api/calendar", (req, res) => {
+  const calendar = new Calendar();
+  calendar.createCalendar();
+});
+app.post("/api/calendar/events", async(req, res) => {
+  const { startDate, endDate, title } = req.body;
+  const calendar = new Calendar();
+  await calendar.createEvent({ startDate, endDate, title });
+  res.json("OK");
 });
 app.get("/api/bootstrap", (req, res) => {
   res.json("OK");

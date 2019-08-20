@@ -5,7 +5,7 @@ import { Observable } from "rxjs/Observable";
 import { map, merge, tap } from "rxjs/operators";
 import { CalendarEvent } from "angular-calendar";
 import { ICalendarModel } from "./calendar.model";
-import { IViewChanged } from "./utils";
+import { IViewChanged, IEvent } from "./utils";
 
 @Injectable()
 export class CalendarService {
@@ -27,5 +27,14 @@ export class CalendarService {
           });
         })
       );
+  }
+
+  createEvent(data: IEvent): Observable<any> {
+    const { startDate, endDate, title } = data;
+    return this.httpClient.post("/api/calendar/events", {
+      startDate,
+      endDate,
+      title
+    });
   }
 }

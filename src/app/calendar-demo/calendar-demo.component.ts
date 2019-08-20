@@ -7,6 +7,7 @@ import { CalendarService } from "../calendar.service";
 import { Subscription } from "rxjs/Subscription";
 import { CreateEventDialogComponent } from "../create-event-dialog/create-event-dialog.component";
 import { Subject } from "rxjs/Subject";
+import { IEvent } from "../utils";
 
 @Component({
   selector: "app-calendar-demo",
@@ -48,6 +49,15 @@ export class CalendarDemoComponent implements OnInit, OnDestroy {
   onTimeClickedInDayView($event: { date: Date}) {
     this.openDialog($event.date);
   }
+  createEvent(data: IEvent) {
+    this.calendarService.createEvent(data).subscribe(() => {
+      this.events = [...this.events, {
+        title: data.title,
+        start: data.startDate,
+        end: data.endDate
+      }];
+    });
+  }
   openDialog(date: Date): void {
     let dialogRef = this.dialog.open(CreateEventDialogComponent, {
       width: '480px',
@@ -57,13 +67,8 @@ export class CalendarDemoComponent implements OnInit, OnDestroy {
         endDate: moment(date).add(1, "hours").toDate()
       }
     });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result, "###");
-      this.events = [...this.events, {
-        title: result.title,
-        start: result.startDate,
-        end: result.endDate
-      }];
+    dialogRef.afterClosed().subscribe((result: IEvent) => {
+      this.createEvent(result); 
     });
   }
 }

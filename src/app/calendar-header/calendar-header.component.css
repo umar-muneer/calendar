@@ -32,6 +32,11 @@
 .today-button {
   font-size: 20px;
 }
+.authorize {
+  margin-top:auto;
+  margin-bottom: auto;
+  margin-left: 10px;
+}
 
 .health-status {
   margin: auto;

@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import * as moment from "moment";
+import { IEvent } from '../utils';
 @Component({
   selector: 'app-create-event-dialog',
   templateUrl: './create-event-dialog.component.html',
@@ -22,7 +23,7 @@ export class CreateEventDialogComponent implements OnInit {
       this.endTime = moment(data.endDate).clone().toDate();
     }
 
-  get time() {
+  get time(): IEvent {
     return {
       title: this.title,
       startDate: this.parseDateAndTime(this.startDate, this.startTime),

@@ -40,5 +40,44 @@ class Calendar {
       throw error;
     }
   }
+  async createCalendar() {
+    const testjwt = new google.auth.JWT(
+      process.env.SA_CLIENT_EMAIL,
+      null,
+      process.env.SA_PRIVATE_KEY.replace(/\\n/g, "\n"),
+      ["https://www.googleapis.com/auth/calendar"],
+      "umarmuneer@gmail.com"
+    );
+    const calender = google.calendar({ version: "v3", auth: testjwt });
+    console.log("trying to create calendar");
+    calender.calendars.insert({
+      summary: "test-calendar-3"
+    });
+  }
+  async createEvent({ startDate, endDate, title }) {
+    try {
+      await this.authorize();
+      const calendar = google.calendar({ version: "v3", auth: this.jwtClient });
+      const result = await calendar.events.insert({
+        calendarId: this.calendarId,
+        resource: {
+          summary: title,
+          start: {
+            dateTime: startDate,
+            timeZone: "Asia/Karachi"
+          },
+          end: {
+            dateTime: endDate,
+            timeZone: "Asia/Karachi"
+          }
+        }
+      });
+      console.log(result, "###");
+      return result;
+    } catch (error) {
+      console.error("threw error: ", error);
+      throw error;
+    }
+  }
 }
 module.exports = { Calendar };
