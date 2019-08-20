@@ -34,7 +34,7 @@ export class CalendarDemoComponent implements OnInit, OnDestroy {
         (data: Array<CalendarEvent>) => {
           this.events = [...data];
         },
-        err => console.log(err),
+        () => this.showHideProgressSpinner(false),
         () => this.showHideProgressSpinner(false)
       );
     this.calendarService.viewChanged.subscribe(({ viewType, day }) => {
@@ -73,7 +73,7 @@ export class CalendarDemoComponent implements OnInit, OnDestroy {
           }
         ];
       },
-      () => {},
+      () => this.showHideProgressSpinner(false),
       () => this.showHideProgressSpinner(false)
     );
   }
