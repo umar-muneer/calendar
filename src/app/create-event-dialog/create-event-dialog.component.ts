@@ -23,7 +23,7 @@ export class CreateEventDialogComponent implements OnInit {
       this.endTime = moment(data.endDate).clone().toDate();
     }
 
-  get time(): IEvent {
+  get result(): IEvent {
     return {
       title: this.title,
       startDate: this.parseDateAndTime(this.startDate, this.startTime),

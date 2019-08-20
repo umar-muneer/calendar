@@ -2,7 +2,7 @@
   <h1 mat-dialog-title class="title">Add an Event</h1>
   <div mat-dialog-content class="content">
     <mat-form-field>
-      <input matInput placeholder="Title" [value]="title"/>
+      <input matInput placeholder="Title" [(ngModel)]="title"/>
     </mat-form-field>
     <div class="date-time-picker">
       <mat-form-field class="date-picker">
@@ -23,6 +23,6 @@
   </div>
   <div class="action-buttons">
     <button mat-raised-button color="warn" (click)="onNoClick()">Cancel</button>
-    <button mat-raised-button color="primary" class="ok-action-button" [mat-dialog-close]="time">Ok</button>
+    <button mat-raised-button color="primary" class="ok-action-button" [mat-dialog-close]="result">Ok</button>
   </div>  
 </div>
