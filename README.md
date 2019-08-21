@@ -26,6 +26,9 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
+## Guidelines
+- you have to run local machine with TZ=UTC
+
 ## Useful Links for the demo
 
 - https://neal.codes/blog/google-calendar-api-on-g-suite
