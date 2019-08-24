@@ -29,7 +29,7 @@
     "@angular/router": "^5.2.0",
     "@mat-datetimepicker/core": "^1.0.4",
     "@ng-bootstrap/ng-bootstrap": "^1.0.0",
-    "agenda": "^2.0.2",
+    "agenda": "2.0.2",
     "angular-calendar": "^0.24.1",
     "angular-calendar-week-hours-view": "^1.0.2",
     "bootstrap": "^4.0.0",

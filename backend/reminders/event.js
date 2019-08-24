@@ -1,9 +1,9 @@
-const { agenda } = require("./index");
+const ReminderModule = require("./index");
 const moment = require("moment-timezone");
 
 class EventReminder {
   constructor(eventId, eventName, startDate, endDate) {
-    this.agenda = agenda;
+    this.agenda = ReminderModule.Singleton();
     this.startDate = startDate;
     this.endDate = endDate;
     this.eventId = eventId;
@@ -58,9 +58,6 @@ class EventReminder {
     this.agenda.define(this.thirtyMinutesBefore.name, this.run);
     this.agenda.define(this.sixtyMinutesBefore.name, this.run);
     this.agenda.define(this.thirtyMinutesAfter.name, this.run);
-    this.agenda.define("", (job) => {
-      job.attrs.da
-    })
     this.agenda.on("complete", this.onComplete.bind(this));
     await this.agenda.start();
     await this.agenda.schedule(
