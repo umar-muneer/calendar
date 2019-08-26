@@ -52,11 +52,25 @@ const resumeUnfinishedScheduledJobs = async agenda => {
     await job.save();
   }
 };
+const unlockRepeatingJobsAfterGracelessShutdown = async agenda => {
+  logger.info("retrieving repeating jobs to unlock");
+  // we need to retrieve only those jobs that are still running and locked.
+  const jobs = await agenda.jobs({
+    lockedAt: { $ne: null },
+    repeatInterval: { $exists: true }
+  });
+  for (let i = 0;i < jobs.length; i += 1) {
+    const job = jobs[i];
+    job.attrs.nextRunAt = moment().add(5, "seconds").toDate();
+    job.attrs.lockedAt = null;
+    await job.save();
+  }
+};
 const register2 = async () => {
   const agenda = ReminderModule.createNew("agenda2");
 
-  process.on("SIGTERM", graceFulShutdown.bind(null, agenda));
-  process.on("SIGINT", graceFulShutdown.bind(null, agenda));
+  // process.on("SIGTERM", graceFulShutdown.bind(null, agenda));
+  // process.on("SIGINT", graceFulShutdown.bind(null, agenda));
 
   agenda.define("job-b", {concurrency: 1}, (job, done) => {
     logger.info(`job-b triggered at ${moment().format()}`);
@@ -75,7 +89,7 @@ const register2 = async () => {
   });
   await agenda.start();
   await resumeUnfinishedScheduledJobs(agenda);
-
+  await unlockRepeatingJobsAfterGracelessShutdown(agenda);
   return agenda;
 };
 
@@ -102,5 +116,5 @@ const schedule2 = async agenda => {
 (async () => {
   //   await register1();
   const agenda2 = await register2();
-//   await schedule2(agenda2);
+  await schedule2(agenda2);
 })();
