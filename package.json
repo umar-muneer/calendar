@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "node backend/server.js | bunyan",
-    "start:server:dev": "TZ=UTC nodemon backend/server.js | bunyan",
+    "start:server:dev": "nodemon backend/server.js | bunyan",
     "serve": "ng serve --proxy-config=proxy.conf.json",
     "build": "ng build --prod",
     "test": "ng test",
@@ -33,6 +33,7 @@
     "angular-calendar": "^0.24.1",
     "angular-calendar-week-hours-view": "^1.0.2",
     "bootstrap": "^4.0.0",
+    "bottleneck": "2.19.5",
     "bunyan": "^1.8.12",
     "core-js": "^2.4.1",
     "date-fns": "^1.30.1",

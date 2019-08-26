@@ -1,7 +1,22 @@
 const { google } = require("googleapis");
 const path = require("path");
 const util = require("util");
+const Bottleneck = require("bottleneck");
 const { EventReminder } = require("./reminders/event");
+const iterator = require("./date-iterator");
+const createEventsRateLimiter = new Bottleneck({
+  minTime: 333,
+  maxConcurrent: 5
+});
+createEventsRateLimiter.on("debug", (message, data) => {
+  // console.log(message);
+  // console.log(data);
+});
+createEventsRateLimiter.on("failed", async (error, jobInfo) => {
+  const id = jobInfo.options.id;
+  console.warn(`Job ${id} failed: ${error}`);
+});
+
 class Calendar {
   constructor() {
     this.jwtClient = new google.auth.JWT(
@@ -55,7 +70,25 @@ class Calendar {
       summary: "test-calendar-3"
     });
   }
-  async createEvent({ startDate, endDate, title }) {
+  async createRateLimitedEvent({
+    startDate,
+    endDate,
+    title,
+    calendarId,
+    email
+  }) {
+    const next = iterator.next();
+    return createEventsRateLimiter.schedule(() =>
+      this.createEvent({
+        startDate: next.startDate,
+        endDate: next.endDate,
+        title,
+        calendarId,
+        email
+      })
+    );
+  }
+  async createEvent({ startDate, endDate, title, calendarId, email }) {
     /**
      * In the actual implemention, the reminders will only be created after the following two steps are accomplished
      * 1. insert in our local database
@@ -64,10 +97,18 @@ class Calendar {
      * 3. once 1 and 2 are both successful, only then the reminders will be created. this will prohibit creation of dangling reminders
      */
     try {
-      await this.authorize();
-      const calendar = google.calendar({ version: "v3", auth: this.jwtClient });
+      const testjwt = new google.auth.JWT(
+        process.env.SA_CLIENT_EMAIL,
+        null,
+        process.env.SA_PRIVATE_KEY.replace(/\\n/g, "\n"),
+        ["https://www.googleapis.com/auth/calendar"],
+        // "umar.muneer1@pakistanpropertyshow.com",
+        email
+      );
+
+      const calendar = google.calendar({ version: "v3", auth: testjwt });
       const { data } = await calendar.events.insert({
-        calendarId: this.calendarId,
+        calendarId,
         resource: {
           summary: title,
           start: {
@@ -80,13 +121,13 @@ class Calendar {
           }
         }
       });
-      const reminder = new EventReminder(
-        data.id,
-        data.summary,
-        data.start.dateTime,
-        data.end.dateTime
-      );
-      await reminder.register();
+      // const reminder = new EventReminder(
+      //   data.id,
+      //   data.summary,
+      //   data.start.dateTime,
+      //   data.end.dateTime
+      // );
+      // await reminder.register();
       return data;
     } catch (error) {
       console.error("threw error: ", error);

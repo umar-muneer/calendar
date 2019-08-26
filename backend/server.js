@@ -29,11 +29,25 @@ app.post("/api/calendar", (req, res) => {
   const calendar = new Calendar();
   calendar.createCalendar();
 });
-app.post("/api/calendar/events", async(req, res) => {
-  const { startDate, endDate, title } = req.body;
-  const calendar = new Calendar();
-  const result = await calendar.createEvent({ startDate, endDate, title });
-  res.json(result);
+app.post("/api/calendar/events", async (req, res) => {
+  try {
+    const { startDate, endDate, title, calendarId, email } = req.body;
+    if (!startDate || !endDate || !title || !calendarId || !email) {
+      res.status(400).end();
+      return;
+    }
+    const calendar = new Calendar();
+    const result = await calendar.createRateLimitedEvent({
+      startDate,
+      endDate,
+      title,
+      calendarId,
+      email
+    });
+    res.json(result);
+  } catch (error) {
+    res.status(500).json(error);
+  }
 });
 app.get("/api/bootstrap", (req, res) => {
   res.json("OK");
@@ -42,4 +56,6 @@ app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "../", "dist", "index.html"));
 });
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`server listening at port: ${port}`));
+app
+  .listen(port, () => console.log(`server listening at port: ${port}`))
+  .setTimeout(15 * 60000);
