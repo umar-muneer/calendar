@@ -69,8 +69,8 @@ const unlockRepeatingJobsAfterGracelessShutdown = async agenda => {
 const register2 = async () => {
   const agenda = ReminderModule.createNew("agenda2");
 
-  // process.on("SIGTERM", graceFulShutdown.bind(null, agenda));
-  // process.on("SIGINT", graceFulShutdown.bind(null, agenda));
+  process.on("SIGTERM", graceFulShutdown.bind(null, agenda));
+  process.on("SIGINT", graceFulShutdown.bind(null, agenda));
 
   agenda.define("job-b", {concurrency: 1}, (job, done) => {
     logger.info(`job-b triggered at ${moment().format()}`);
