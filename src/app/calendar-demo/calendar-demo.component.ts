@@ -1,25 +1,24 @@
-import * as moment from "moment";
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { MatDialog } from "@angular/material/dialog";
-import { CalendarEvent } from "angular-calendar";
-import * as views from "../../constants";
-import { CalendarService } from "../calendar.service";
-import { Subscription } from "rxjs/Subscription";
-import { CreateEventDialogComponent } from "../create-event-dialog/create-event-dialog.component";
-import { Subject } from "rxjs/Subject";
-import { IEvent } from "../utils";
+import * as moment from 'moment';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { CalendarEvent } from 'angular-calendar';
+import * as views from '../../constants';
+import { CalendarService } from '../calendar.service';
+import { Subscription } from 'rxjs/Subscription';
+import { CreateEventDialogComponent } from '../create-event-dialog/create-event-dialog.component';
+import { IEvent } from '../utils';
 
 @Component({
-  selector: "app-calendar-demo",
-  templateUrl: "./calendar-demo.component.html",
-  styleUrls: ["./calendar-demo.component.css"]
+  selector: 'app-calendar-demo',
+  templateUrl: './calendar-demo.component.html',
+  styleUrls: ['./calendar-demo.component.css']
 })
 export class CalendarDemoComponent implements OnInit, OnDestroy {
   events: CalendarEvent[];
   viewDate: Date = new Date();
   views: any = views;
-  selectedView: string = views.VIEW_DAY;
-  opInProgress: boolean = false;
+  selectedView: string = views.VIEW_WEEK;
+  opInProgress = false;
   private eventsSubscription: Subscription;
 
   constructor(
@@ -78,13 +77,13 @@ export class CalendarDemoComponent implements OnInit, OnDestroy {
     );
   }
   openDialog(date: Date): void {
-    let dialogRef = this.dialog.open(CreateEventDialogComponent, {
-      width: "480px",
+    const dialogRef = this.dialog.open(CreateEventDialogComponent, {
+      width: '480px',
       data: {
-        title: "New Event",
+        title: 'New Event',
         startDate: date,
         endDate: moment(date)
-          .add(1, "hours")
+          .add(1, 'hours')
           .toDate()
       }
     });

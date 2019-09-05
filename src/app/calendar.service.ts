@@ -2,7 +2,7 @@ import { Injectable, EventEmitter } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import * as moment from "moment";
 import { Observable } from "rxjs/Observable";
-import { map, merge, tap } from "rxjs/operators";
+import { map } from "rxjs/operators";
 import { CalendarEvent } from "angular-calendar";
 import { ICalendarModel } from "./calendar.model";
 import { IViewChanged, IEvent } from "./utils";
