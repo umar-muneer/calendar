@@ -14,7 +14,18 @@ import { IEvent } from '../utils';
   styleUrls: ['./calendar-demo.component.css']
 })
 export class CalendarDemoComponent implements OnInit, OnDestroy {
-  events: CalendarEvent[];
+  events: CalendarEvent[] = [
+    {
+      title: 'Click me',
+      start: moment().startOf("hour").subtract(2, "hour").toDate(),
+      end: moment().endOf("hour").toDate()
+    },
+    {
+      title: 'Or click me',
+      start: new Date(),
+      end: moment().startOf("hour").add(1, "hour").toDate()
+    }
+  ];
   viewDate: Date = new Date();
   views: any = views;
   selectedView: string = views.VIEW_WEEK;
