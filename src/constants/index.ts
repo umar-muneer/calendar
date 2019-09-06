@@ -1,7 +1,7 @@
 
-const VIEW_DAY: string = "Day";
-const VIEW_WEEK: string = "Week";
-const VIEW_MONTH: string = "Month";
+const VIEW_DAY = 'Day';
+const VIEW_WEEK = 'Week';
+const VIEW_MONTH = 'Month';
 
 export {
     VIEW_DAY,

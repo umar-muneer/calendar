@@ -14,6 +14,7 @@
       *ngSwitchCase="views.VIEW_WEEK"
       [events]="events"
       [viewDate]="viewDate"
+      [headerTemplate]="customCellTemplate"
       (hourSegmentClicked)="onTimeClickedInDayView($event)"
     ></iq-calendar-week-hours-view>
     <mwl-calendar-day-view
@@ -27,3 +28,7 @@
 <div class="dark-overlay" *ngIf="opInProgress">
     <mat-spinner class="spinner"></mat-spinner>
 </div>
+<ng-template #customCellTemplate let-day="day" let-locale="locale">
+  <small style="margin: 5px">Hello World</small
+  >
+</ng-template>
